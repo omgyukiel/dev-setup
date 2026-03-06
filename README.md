@@ -42,4 +42,5 @@ This directory mirrors the core productivity configs I rely on daily. Copy or sy
 3. For tmux plugins run `tmux new -d` and `tmux run-shell ~/.tmux/plugins/tpm/bindings/install_plugins` or simply press `prefix + I` inside tmux.
 4. Reload or restart each tool (`tmux source-file ~/.tmux.conf`, `aerospace reload-config`, `wezterm` relaunch, `exec zsh`).
 
+yes, it's vibed with codex :^)
 _Last updated: 2026-03-06_
