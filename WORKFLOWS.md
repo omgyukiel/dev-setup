@@ -31,6 +31,13 @@ Quick reference for the keyboard flows that compound productivity across tmux, A
 - Git context: lean on the prompt’s VCS segment—branch state is always visible; transient prompt keeps history tidy right after enter.
 - Kubernetes helpers: `caa-kubectx` completion + the prompt’s kube context indicator (if enabled in `.p10k.zsh`) guards against staging/prod mix-ups.
 
+## ripgrep
+
+- Core search: `rg 'needle'` recursively scans the current directory with smart case sensitivity (uppercase forces exact case, lowercase matches both).
+- Path filters: add `-g '*.ts'` or `-g '!node_modules'` to narrow the scan to the files you care about while skipping bulky deps.
+- Context slices: use `-n` to show line numbers, `-C3` for three lines of context, and `--stats` when you want a quick hit rate summary.
+- Fast refines: combine ripgrep with keyboard nav—`rg pattern | fzf` for interactive filtering, or jump straight to files via `rg --files -g '*.py'`.
+
 ## Daily Scenarios
 
 - **Cluster triage sprint:** Use AeroSpace workspace `Alt-3` for kube dashboards. Inside WezTerm, split tmux panes (`Ctrl-a |` and `Ctrl-a -`) for `kubectl get pods -w`, logs, and live `oci` CLI. When an outage hits, zoom the offending pane (`Ctrl-a m`), grab context, then unzoom to continue sweeping.
