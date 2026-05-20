@@ -19,6 +19,15 @@ config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.8
 config.macos_window_background_blur = 10
 
+config.send_composed_key_when_left_alt_is_pressed = false
+config.send_composed_key_when_right_alt_is_pressed = false
+
+config.keys = {
+	{ key = "LeftArrow", mods = "OPT", action = wezterm.action.SendString("\x1bb") },
+	{ key = "RightArrow", mods = "OPT", action = wezterm.action.SendString("\x1bf") },
+	{ key = "Backspace", mods = "OPT", action = wezterm.action.SendString("\x1b\x7f") },
+}
+
 -- Coolnight color scheme
 config.colors = {
 	foreground = "#CBE0F0",

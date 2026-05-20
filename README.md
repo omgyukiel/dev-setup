@@ -5,14 +5,14 @@ This directory mirrors the core productivity configs I rely on daily. Copy or sy
 ## Included Configs
 
 - `tmux/tmux.conf`
-  - Prefix remapped to `Ctrl-a`, ergonomic split bindings, vi-mode copy, mouse support.
+  - Prefix remapped to `Ctrl-b`, ergonomic split bindings, vi-mode copy, mouse support.
   - Plug-in stack via TPM (`vim-tmux-navigator`, `tmux-resurrect`, `tmux-continuum`, `tokyo-night` theme).
 - `aerospace/aerospace.toml`
-  - Alt-based navigation/move/resize bindings, workspace grid (`alt-1`..`alt-9`, `alt-a`..`alt-z`).
+  - Numbered workspace bindings (`alt-1`..`alt-9`, `alt-shift-1`..`alt-shift-9`) with Alt-based window movement controls.
   - Automatic launch at login, normalization tweaks, and smart workspace toggles.
 - `wezterm/wezterm.lua`
   - Meslo Nerd Font at 19pt, Batman base scheme with custom Coolnight palette.
-  - Translucent window background with macOS blur and tab bar enabled.
+  - Translucent window background with macOS blur, tab bar enabled, and Option-as-Meta terminal editing.
 - `zsh/.zshrc`
   - Powerlevel10k prompt, Rancher Desktop PATH, kubectx completion, autosuggestions, syntax highlighting.
   - Quality-of-life aliases (`ls`→`eza`), directory jumping via `zoxide`.
@@ -21,12 +21,12 @@ This directory mirrors the core productivity configs I rely on daily. Copy or sy
 
 ## tmux Quick Reference
 
-- `Ctrl-a c` creates a new window in the current session—keep focused projects isolated per window.
-- `Ctrl-a w` opens an interactive window picker (arrow keys + enter) so you can hop directly to hidden windows 4+ without cycling.
-- `Ctrl-a ,` renames the current window; use short context labels (`api`, `ops`, `docs`) to make the status line readable.
-- `Ctrl-a s` lists sessions; hit enter to switch or `d` to detach the highlighted one without leaving your current client.
-- `Ctrl-a {` / `Ctrl-a }` swaps the focused pane with the previous/next pane—handy for reordering without rebuilding splits.
-- `Ctrl-a [` enters copy mode; use `v` + motion to select text and `y` to yank into the tmux buffer for paste into other panes.
+- `Ctrl-b c` creates a new window in the current session—keep focused projects isolated per window.
+- `Ctrl-b w` opens an interactive window picker (arrow keys + enter) so you can hop directly to hidden windows 4+ without cycling.
+- `Ctrl-b ,` renames the current window; use short context labels (`api`, `ops`, `docs`) to make the status line readable.
+- `Ctrl-b s` lists sessions; hit enter to switch or `d` to detach the highlighted one without leaving your current client.
+- `Ctrl-b {` / `Ctrl-b }` swaps the focused pane with the previous/next pane—handy for reordering without rebuilding splits.
+- `Ctrl-b [` enters copy mode; use `v` + motion to select text and `y` to yank into the tmux buffer for paste into other panes.
 
 ## Restore Steps
 
@@ -42,4 +42,4 @@ This directory mirrors the core productivity configs I rely on daily. Copy or sy
 3. For tmux plugins run `tmux new -d` and `tmux run-shell ~/.tmux/plugins/tpm/bindings/install_plugins` or simply press `prefix + I` inside tmux.
 4. Reload or restart each tool (`tmux source-file ~/.tmux.conf`, `aerospace reload-config`, `wezterm` relaunch, `exec zsh`).
 
-_Last updated: 2026-03-06_
+_Last updated: 2026-05-20_
