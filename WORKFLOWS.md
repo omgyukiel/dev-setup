@@ -15,7 +15,7 @@ Quick reference for the keyboard flows that compound productivity across tmux, A
 - Workspace grid: `Alt-1`..`Alt-9` switches between numbered workspaces; `Alt-Shift-1`..`Alt-Shift-9` sends the focused app to a numbered workspace.
 - Focus vs. move: `Alt-h/j/k/l` focuses adjacent windows; add `Shift` to move the current app to a neighbor slot.
 - Layout flip: `Alt-/` forces tile mode; `Alt-,` toggles accordion stacks when you need vertical code reviews.
-- Monitor shuttling: `Alt-Shift-Tab` cycles the entire workspace to the next display; `Alt-Tab` bounces between current and previous workspace.
+- Secondary display: `Alt-Shift-Tab` jumps to the dedicated `secondary` workspace, `Alt-Shift-S` sends the focused window there, and `Alt-Tab` bounces between current and previous workspace.
 - Layout reset: `Alt-Shift-;` enters service mode, then `r` flattens workspace trees or `backspace` closes all but the active window.
 
 ## WezTerm
@@ -49,7 +49,7 @@ Quick reference for the keyboard flows that compound productivity across tmux, A
 ## Daily Scenarios
 
 - **Cluster triage sprint:** Use AeroSpace workspace `Alt-3` for kube dashboards. Inside WezTerm, split tmux panes (`Ctrl-b |` and `Ctrl-b -`) for `kubectl get pods -w`, logs, and live `oci` CLI. When an outage hits, zoom the offending pane (`Ctrl-b m`), grab context, then unzoom to continue sweeping.
-- **Agent dev loop:** Workspace `Alt-1` houses code. Run Neovim + tests in tmux panes; left pane auto-reloads `pytest -f`, right pane hosts the agent process, bottom pane for Git. Use `Alt-Shift-h/l` to move the focused app in the layout, or `Alt-Shift-Tab` to move the workspace to another monitor.
+- **Agent dev loop:** Workspace `Alt-1` houses code. Run Neovim + tests in tmux panes; left pane auto-reloads `pytest -f`, right pane hosts the agent process, bottom pane for Git. Use `Alt-Shift-h/l` to move the focused app in the layout, or `Alt-Shift-Tab` to jump to the dedicated secondary-display workspace.
 - **Release prep:** Workspace `Alt-4` handles release branches. Spawn a fresh tmux session (`tmux new -s release -c ~/dev/<repo>`) via `Ctrl-b M-c`. Track checklists in tab 2, `helm upgrade` dry runs in tab 3; rely on tmux-resurrect to recover if the laptop reboots mid-release.
 - **Morning ramp-up:** After login, AeroSpace autostarts and tmux-continuum revives yesterday’s sessions. Run `exec zsh` in WezTerm to refresh the shell, then `Ctrl-b n` / `Ctrl-b p` to skim overnight panes. Use `Alt-Tab` to flip between current and last workspace while triaging notifications.
 - **Context clean-up:** When windows sprawl, hit `Alt-Shift-;` then `backspace` in AeroSpace to close all but the active window; follow with `Ctrl-b &` inside tmux to kill stray windows, keeping your session lean.

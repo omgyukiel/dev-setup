@@ -18,6 +18,8 @@ This directory mirrors the core productivity configs I rely on daily. Copy or sy
   - Quality-of-life aliases (`ls`→`eza`), directory jumping via `zoxide`.
 - `zsh/.p10k.zsh`
   - Generated 2026-03-05; defines the rainbow, two-line Powerlevel10k prompt used by `.zshrc`.
+- `scripts/link-configs.sh`
+  - Bootstraps symlinks into `$HOME`; defaults to the portable core (`tmux` + `aerospace`) and keeps optional configs opt-in.
 
 ## tmux Quick Reference
 
@@ -31,14 +33,17 @@ This directory mirrors the core productivity configs I rely on daily. Copy or sy
 ## Restore Steps
 
 1. Install dependencies: Homebrew packages for `tmux`, `aerospace`, `wezterm`, `zoxide`, `eza`, `powerlevel10k`, `zsh-autosuggestions`, `zsh-syntax-highlighting`.
-2. Link configs back into place:
+2. Link the portable core configs back into place:
    ```bash
-   ln -s $(pwd)/tmux/tmux.conf ~/.tmux.conf
-   ln -s $(pwd)/aerospace/aerospace.toml ~/.config/aerospace/aerospace.toml
-   ln -s $(pwd)/wezterm/wezterm.lua ~/.wezterm.lua
-   ln -s $(pwd)/zsh/.zshrc ~/.zshrc
-   ln -s $(pwd)/zsh/.p10k.zsh ~/.p10k.zsh
+   bash scripts/link-configs.sh
    ```
+   Optional:
+   ```bash
+   bash scripts/link-configs.sh --with-wezterm
+   bash scripts/link-configs.sh --with-zsh
+   bash scripts/link-configs.sh --all
+   ```
+   `zsh` is opt-in because `.zshrc` currently includes user-specific paths and shell startup behavior that may not belong on every Mac.
 3. For tmux plugins run `tmux new -d` and `tmux run-shell ~/.tmux/plugins/tpm/bindings/install_plugins` or simply press `prefix + I` inside tmux.
 4. Reload or restart each tool (`tmux source-file ~/.tmux.conf`, `aerospace reload-config`, `wezterm` relaunch, `exec zsh`).
 

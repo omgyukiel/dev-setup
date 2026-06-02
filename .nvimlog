@@ -1,0 +1,2 @@
+WRN 2026-06-02T12:51:37.442 ?.44228    server_start:199: Failed to start server: operation not permitted: /var/folders/vj/3g444tzn6z3d19hy5k84br2m0000gn/T/nvim.klevu/dBeOAh/nvim.44228.0
+WRN 2026-06-02T12:51:40.557 ?.44229    server_start:199: Failed to start server: operation not permitted: /var/folders/vj/3g444tzn6z3d19hy5k84br2m0000gn/T/nvim.klevu/sE20Xd/nvim.44229.0
