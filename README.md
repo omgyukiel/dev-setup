@@ -1,6 +1,6 @@
 # Dev Setup Snapshot
 
-This directory mirrors the core productivity configs I rely on daily. Copy or symlink the files back into `$HOME` (or the noted paths) to restore the same shell, terminal, tiling, and multiplexer experience.
+This directory mirrors the core productivity configs I rely on daily. Copy or symlink the files back into `$HOME` (or the noted paths) to restore the same editor, shell, terminal, tiling, and multiplexer experience.
 
 ## Included Configs
 
@@ -10,6 +10,9 @@ This directory mirrors the core productivity configs I rely on daily. Copy or sy
 - `aerospace/aerospace.toml`
   - Numbered workspace bindings (`alt-1`..`alt-9`, `alt-shift-1`..`alt-shift-9`) with Alt-based window movement controls.
   - Automatic launch at login, normalization tweaks, and smart workspace toggles.
+- `nvim/`
+  - LazyVim starter config with Markdown extras, Snacks picker/explorer, Python venv selection, and tmux-aware pane navigation.
+  - `Ctrl-h/j/k/l` routes through `vim-tmux-navigator` in normal buffers while Snacks keeps its local list navigation.
 - `wezterm/wezterm.lua`
   - Meslo Nerd Font at 19pt, Batman base scheme with custom Coolnight palette.
   - Translucent window background with macOS blur, tab bar enabled, and Option-as-Meta terminal editing.
@@ -19,7 +22,7 @@ This directory mirrors the core productivity configs I rely on daily. Copy or sy
 - `zsh/.p10k.zsh`
   - Generated 2026-03-05; defines the rainbow, two-line Powerlevel10k prompt used by `.zshrc`.
 - `scripts/link-configs.sh`
-  - Bootstraps symlinks into `$HOME`; defaults to the portable core (`tmux` + `aerospace`) and keeps optional configs opt-in.
+  - Bootstraps symlinks into `$HOME`; defaults to the portable core (`tmux` + `aerospace` + `nvim`) and keeps optional configs opt-in.
 
 ## tmux Quick Reference
 
@@ -45,6 +48,7 @@ This directory mirrors the core productivity configs I rely on daily. Copy or sy
    ```
    `zsh` is opt-in because `.zshrc` currently includes user-specific paths and shell startup behavior that may not belong on every Mac.
 3. For tmux plugins run `tmux new -d` and `tmux run-shell ~/.tmux/plugins/tpm/bindings/install_plugins` or simply press `prefix + I` inside tmux.
-4. Reload or restart each tool (`tmux source-file ~/.tmux.conf`, `aerospace reload-config`, `wezterm` relaunch, `exec zsh`).
+4. Start Neovim once with `nvim`; Lazy will bootstrap `lazy.nvim` and install the pinned LazyVim plugins from `nvim/lazy-lock.json`.
+5. Reload or restart each tool (`tmux source-file ~/.tmux.conf`, `aerospace reload-config`, `wezterm` relaunch, `exec zsh`).
 
-_Last updated: 2026-05-20_
+_Last updated: 2026-06-04_

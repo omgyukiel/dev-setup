@@ -15,6 +15,7 @@ Links the portable dev-setup configs into $HOME.
 
 Defaults:
   - AeroSpace
+  - Neovim / LazyVim
   - tmux
 
 Optional:
@@ -86,6 +87,7 @@ done
 
 ensure_link "$repo_root/tmux/tmux.conf" "$HOME/.tmux.conf"
 ensure_link "$repo_root/aerospace/aerospace.toml" "$HOME/.config/aerospace/aerospace.toml"
+ensure_link "$repo_root/nvim" "$HOME/.config/nvim"
 
 if [[ "$link_wezterm" -eq 1 ]]; then
   ensure_link "$repo_root/wezterm/wezterm.lua" "$HOME/.wezterm.lua"

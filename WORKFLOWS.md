@@ -10,6 +10,14 @@ Quick reference for the keyboard flows that compound productivity across tmux, A
 - Session attach in cwd: inside an existing pane hit `Ctrl-b M-c` to open/attach a session rooted where you already are (great for project-specific multiplexers).
 - Morning resume: let tmux-continuum restore your layout, then cycle windows with `Ctrl-b n`/`Ctrl-b p` and use tmux's built-in pane selectors when needed.
 
+## LazyVim / Neovim
+
+- Tmux-aware panes: use `Ctrl-h/j/k/l` in normal buffers to move across Neovim windows and out to adjacent tmux panes.
+- Snacks explorer: `<leader>e` opens at project root, `<leader>E` opens at cwd, `u` refreshes, `H` toggles hidden files, and `I` toggles gitignored files.
+- File search: `<leader>ff` searches project root, `<leader>fF` searches cwd, and `<leader>,` switches among open buffers.
+- Markdown flow: `gcc` comments the current line, visual `gc` comments a selection, and `<leader>cp` toggles Markdown preview.
+- Python flow: enable the Python extra, install `pyright`/`ruff` in Mason, then use `<leader>cv` to select the project venv before `gd` import navigation.
+
 ## AeroSpace
 
 - Workspace grid: `Alt-1`..`Alt-9` switches between numbered workspaces; `Alt-Shift-1`..`Alt-Shift-9` sends the focused app to a numbered workspace.
