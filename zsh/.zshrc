@@ -1,32 +1,15 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# Homebrew
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-echo "Hello from the shell!"
-
-if [[ -x /Users/klevu/.ssh/scm-script.sh ]]; then
-  scm-ssh() { /Users/klevu/.ssh/scm-script.sh "$@"; }
-  scm-ssh start_agent
-fi
-
+# Completion
 autoload -U compinit && compinit
 
 if autoload -U +X bashcompinit; then
   bashcompinit
   [[ -r "${HOME}/.bash_completions/caa-kubectx.sh" ]] && source "${HOME}/.bash_completions/caa-kubectx.sh"
 fi
-
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/klevu/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 
 # History setup
 HISTFILE=$HOME/.zhistory
@@ -37,17 +20,25 @@ setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt hist_verify
 
-# completion using arrow keys (based on history)
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Arrow-key history search
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
 
-# ---- Eza (better ls) -----
+# Shell niceties, guarded so a missing package does not break startup.
+[[ -r /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[[ -r /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-alias ls="eza --icons=always"
+# Eza (better ls)
+if command -v eza >/dev/null 2>&1; then
+  alias ls="eza --icons=always"
+fi
 
-# ---- Zoxide (better cd) ----
-eval "$(zoxide init zsh)"
-alias cd="z"
+# Zoxide (better cd)
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+  alias cd="z"
+fi
 
+# Disabled for this Ghostty setup:
+# - Powerlevel10k instant prompt/theme and ~/.p10k.zsh
+# - Old /Users/klevu SCM/Rancher Desktop paths
