@@ -19,3 +19,7 @@ id_ed25519*
 profiles.json
 profile.json
 credentials.json
+
+# Local Python diagnostic caches
+__pycache__/
+*.pyc

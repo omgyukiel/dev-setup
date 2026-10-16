@@ -25,7 +25,7 @@ Press Ctrl-B, release, then the listed key unless shown otherwise.
 | `r` | Reload config |
 | Ctrl-S / Ctrl-R | Save / restore session layout |
 | Shift-I | Install configured TPM plugins |
-| `[` | Enter vi copy mode; `v` selects and `y` copies into tmux's buffer |
+| `[` | Enter vi copy mode; `v` selects and `y` copies to the macOS clipboard |
 
 Ctrl-H/J/K/L (without the prefix) moves left/down/up/right across panes. Inside
 Neovim, it moves through editor splits first, then into tmux panes at the edge.
@@ -82,3 +82,13 @@ bat path/to/file
 
 Oracle and Kubernetes helpers are machine-specific and load from
 `~/.config/zsh/local.zsh` when configured.
+
+## Resource monitoring
+
+Run `btop` to view this Mac's CPU, memory, disks, network activity and processes.
+Press `q` to quit. Keep it in a tmux window named `monitor` while other windows
+remain available for editing and shell commands.
+
+For a guided walkthrough, follow [docs/PRACTICE.md](docs/PRACTICE.md). Use `tldr tmux`,
+`tldr rg`, or `tldr tar` for short command examples; the first lookup downloads
+the page cache.

@@ -19,56 +19,34 @@ and a transparent title bar. It adds no custom shortcuts. Powerlevel10k's saved
 Classic two-line prompt is kept separately from its optional Tokyo Night color
 overlay. LazyVim uses Tokyo Night Moon, and tmux uses PowerKit's Tokyo Night theme.
 
-## Restore on another Mac
+## Restore on a personal Mac
 
-Install Homebrew first, then run these from the cloned repository:
-
-```bash
-brew bundle --file=Brewfile
-```
-
-The shell uses Oh My Zsh with Powerlevel10k. If they are absent, install them:
+Install Apple's Command Line Tools and Homebrew, clone this repo, then run:
 
 ```bash
-git clone https://github.com/ohmyzsh/ohmyzsh.git "$HOME/.oh-my-zsh"
-git clone --depth 1 https://github.com/romkatv/powerlevel10k.git \
-  "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"
+bash scripts/bootstrap.sh
+python3 scripts/verify-setup.py --packages --personal
 ```
 
-Install MesloLGS NF or another Nerd Font if icons are missing. MesloLGS NF is
-already installed on this Mac. Keep zsh as the login shell; Homebrew Bash is a
-dependency of the tmux status theme.
+The bootstrap installs shared packages without upgrading existing tools, clones
+missing Oh My Zsh/Powerlevel10k/TPM, links configs with backups, and prepares the
+pinned Neovim environment. It does not need a work account, VPN, or Oracle tools.
+Open AeroSpace and grant Accessibility access, then add `--apps` to verification.
 
-Link the configs:
+- [Personal-Mac onboarding and a ready-to-paste Codex prompt](docs/ONBOARDING.md)
+- [Guided practice: tmux, Neovim, shell helpers, and AeroSpace](docs/PRACTICE.md)
+- [Codex repository instructions](AGENTS.md)
+- [Validation evidence and limits](docs/VALIDATION.md)
 
-```bash
-bash scripts/link-configs.sh --all
-```
+`bash scripts/link-configs.sh --all` relinks configs without installing packages.
+The default link command includes Ghostty, tmux, AeroSpace and Neovim; `--only-zsh`
+links just the shell. Correct links are left alone. Replaced files/directories
+are backed up outside Git under `~/.local/state/dev-setup/backups/`.
 
-The default command without flags links Ghostty, tmux, AeroSpace and Neovim.
-`--with-zsh` or `--all` also links the shell; `--only-zsh` links just the shell.
-Re-running the script leaves correct links alone. Existing files/directories
-are moved to `~/.local/state/dev-setup/backups/`, outside Git.
-
-Install tmux plugins if TPM is absent:
-
-```bash
-git clone --depth 1 https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
-tmux new -s dev
-```
-
-Inside tmux, press Ctrl-B, release, then Shift-I. TPM installs the navigation,
-PowerKit, resurrect and continuum plugins listed in `tmux/tmux.conf`.
-
-Launch AeroSpace and grant **System Settings → Privacy & Security → Accessibility**
-permission. The saved config starts it at login and keeps workspaces 1–9 plus
-`secondary` available, with the latter assigned to a secondary monitor when present.
-
-Open `nvim` to bootstrap LazyVim. The lockfile records plugin versions; use
-`:Lazy restore` to restore those versions. JSON, Markdown, Python and TOML extras
-are enabled. `:Mason` manages language tools; this Mac has pyright, ruff, JSON and
-Lua language servers, markdownlint-cli2, markdown-toc, stylua and shfmt installed.
-Run `:checkhealth lazyvim` to verify editor dependencies.
+The baseline includes `btop` for Mac resource monitoring, `tldr` (from `tlrc`) for
+short command examples, `uv` for Python projects, Node 24 for editor tooling, and
+a Nerd Font for icon glyphs. A working local NVM runtime takes priority over the
+Homebrew Node fallback. No global Git identity is set by this setup.
 
 ## Local settings and credentials
 
@@ -106,7 +84,8 @@ afterward. Ghostty's appearance settings are independent of the prompt colors.
 ## Keyboard layers and sessions
 
 Option belongs to AeroSpace, Ctrl-B is the tmux prefix, and Ctrl-H/J/K/L navigates
-Neovim splits and adjacent tmux panes. The fzf Option-C shortcut is disabled.
+Neovim splits and adjacent tmux panes. The fzf Option-C shortcut is disabled. Prefer tmux windows as tabs inside one
+native Ghostty tab when using AeroSpace; see the onboarding guide for why.
 
 ```bash
 tmux new -s dev
@@ -118,17 +97,16 @@ Ctrl-B then Ctrl-R. Continuum saves every 15 minutes while the tmux status bar
 runs and restores the last saved layout on tmux server start. This restores the
 session layout rather than arbitrary processes at their previous execution state.
 
-See [WORKFLOWS.md](WORKFLOWS.md) for the daily shortcuts.
+Tmux selections can be copied to the macOS clipboard with tmux-yank. New splits
+inherit the current pane's directory.
+
+Start with [docs/PRACTICE.md](docs/PRACTICE.md), then use
+[WORKFLOWS.md](WORKFLOWS.md) as the daily reference.
 
 ## Verify changes
 
 ```bash
-brew bundle check --file=Brewfile
-bash -n scripts/link-configs.sh
-zsh -n zsh/.zshrc
-ghostty +validate-config
-aerospace reload-config --no-gui --dry-run --warnings-as-errors
-git diff --check
+python3 scripts/verify-setup.py --packages --apps
 ```
 
 Reload Ghostty with Cmd-Shift-Comma, start a new shell, and reload running tmux

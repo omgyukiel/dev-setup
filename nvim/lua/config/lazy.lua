@@ -15,6 +15,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  -- Bootstrap uses a scratch lockfile so first-start discovery cannot change Git.
+  lockfile = vim.env.DEV_SETUP_LAZY_LOCKFILE or (vim.fn.stdpath("config") .. "/lazy-lock.json"),
   spec = {
     -- add LazyVim and import its plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins" },

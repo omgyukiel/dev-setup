@@ -2,9 +2,13 @@
 eval File.read(File.join(__dir__, "Brewfile.shell"))
 brew "bash" # PowerKit requires Bash 5.2+; keep zsh as the login shell.
 brew "tmux"
+brew "btop"
 brew "neovim"
 brew "tree-sitter-cli"
 brew "lazygit"
 tap "nikitabobko/tap"
 cask "nikitabobko/tap/aerospace"
 cask "ghostty"
+brew "node@24" # Fresh-Mac runtime for editor/npm tools; NVM keeps priority.
+brew "uv"
+cask "font-meslo-lg-nerd-font"

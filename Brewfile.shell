@@ -8,3 +8,4 @@ brew "ripgrep"
 brew "bat"
 brew "fd"
 # Powerlevel10k is currently installed under Oh My Zsh custom/themes.
+brew "tlrc" # tldr: concise command examples
