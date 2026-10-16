@@ -1,0 +1,15 @@
+# Appearance
+theme = niji
+font-size = 15
+background-opacity = 0.95
+
+# Spacing
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+
+# Window and interaction
+macos-titlebar-style = transparent
+mouse-hide-while-typing = true
+resize-overlay = never
+confirm-close-surface = true

@@ -1,44 +1,55 @@
-# Homebrew
+# Portable shell settings. Machine-specific access setup lives outside Git.
 if [[ -x /opt/homebrew/bin/brew ]]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# Completion
-autoload -U compinit && compinit
-
-if autoload -U +X bashcompinit; then
-  bashcompinit
-  [[ -r "${HOME}/.bash_completions/caa-kubectx.sh" ]] && source "${HOME}/.bash_completions/caa-kubectx.sh"
+if [[ -r ${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# History setup
-HISTFILE=$HOME/.zhistory
-SAVEHIST=1000
-HISTSIZE=999
-setopt share_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_verify
-
-# Arrow-key history search
-bindkey "^[[A" history-search-backward
-bindkey "^[[B" history-search-forward
-
-# Shell niceties, guarded so a missing package does not break startup.
-[[ -r /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] && source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-[[ -r /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] && source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Eza (better ls)
-if command -v eza >/dev/null 2>&1; then
-  alias ls="eza --icons=always"
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+plugins=(git)
+if [[ -r "$ZSH/oh-my-zsh.sh" ]]; then
+  source "$ZSH/oh-my-zsh.sh"
+else
+  autoload -Uz compinit && compinit
+  [[ ! -r /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme ]] || source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 fi
 
-# Zoxide (better cd)
-if command -v zoxide >/dev/null 2>&1; then
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=50000
+SAVEHIST=50000
+setopt share_history hist_expire_dups_first hist_ignore_dups hist_verify
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
+
+[[ ! -r "$HOME/.config/zsh/local.zsh" ]] || source "$HOME/.config/zsh/local.zsh"
+if [[ -r "$HOME/.bash_completions/caa-kubectx.sh" ]]; then
+  autoload -Uz bashcompinit && bashcompinit
+  source "$HOME/.bash_completions/caa-kubectx.sh"
+fi
+
+alias ro='rg'
+if (( $+commands[eza] )); then
+  alias ls='eza --icons=always'
+  alias ll='eza --icons=always --long --git'
+  alias la='eza --icons=always --long --all --git'
+fi
+if (( $+commands[zoxide] )); then
   eval "$(zoxide init zsh)"
-  alias cd="z"
+  alias cd='z'
+fi
+if (( $+commands[fzf] )); then
+  # Ctrl-R: history; Ctrl-T: files. Leave Option shortcuts for AeroSpace.
+  export FZF_ALT_C_COMMAND=''
+  eval "$(fzf --zsh)"
 fi
 
-# Disabled for this Ghostty setup:
-# - Powerlevel10k instant prompt/theme and ~/.p10k.zsh
-# - Old /Users/klevu SCM/Rancher Desktop paths
+# Resolve the symlink so theme files are found alongside this repo's .zshrc.
+typeset -g DEV_SETUP_ZSH_DIR=${${(%):-%x}:A:h}
+source "$DEV_SETUP_ZSH_DIR/prompt-theme.zsh"
+
+[[ ! -r /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]] || source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Load highlighting last, after all other line-editor widgets.
+[[ ! -r /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] || source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

@@ -1,0 +1,21 @@
+# Local state, migration backups, and logs
+.DS_Store
+*.bak
+*.pre-dev-setup-link*
+.nvimlog
+*.log
+
+# Machine-specific shell settings
+zsh/local.zsh
+zsh/.zshrc.local
+
+# Environment files and credentials
+.env
+.env.*
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+profiles.json
+profile.json
+credentials.json

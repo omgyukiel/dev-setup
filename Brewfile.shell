@@ -1,0 +1,10 @@
+# brew bundle --file=Brewfile.shell
+brew "zoxide"
+brew "eza"
+brew "fzf"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+brew "ripgrep"
+brew "bat"
+brew "fd"
+# Powerlevel10k is currently installed under Oh My Zsh custom/themes.

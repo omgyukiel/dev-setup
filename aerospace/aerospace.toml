@@ -1,3 +1,7 @@
+# AeroSpace config format; preserve the existing numbered workspaces.
+config-version = 2
+persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "secondary"]
+
 # Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
