@@ -1,5 +1,9 @@
 # Daily shortcuts
 
+New tmux sessions print a shortcut reference in their first interactive Zsh shell.
+Run `tmux-help` to print it again. Splits and reconnects do not repeat it.
+`tn` creates or attaches to the `dev` session.
+
 ## Ghostty
 
 - Cmd-T opens a new tab; Cmd-W closes the current surface, with confirmation when needed.

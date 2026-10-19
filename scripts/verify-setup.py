@@ -50,7 +50,7 @@ for target, source in targets.items():
 
 for relative in ['scripts/bootstrap.sh', 'scripts/link-configs.sh']:
     check(run(['/bin/bash', '-n', str(repo / relative)]).returncode == 0, relative + ' syntax')
-for relative in ['zsh/.zshrc', 'zsh/.p10k.zsh', 'zsh/prompt-theme.zsh', 'zsh/themes/tokyo-night.zsh']:
+for relative in ['zsh/.zshrc', 'zsh/.p10k.zsh', 'zsh/prompt-theme.zsh', 'zsh/tmux-help.zsh', 'zsh/themes/tokyo-night.zsh']:
     check(run(['/bin/zsh', '-n', str(repo / relative)]).returncode == 0, relative + ' syntax')
 for relative in ['.oh-my-zsh', '.oh-my-zsh/custom/themes/powerlevel10k', '.tmux/plugins/tpm']:
     check((home / relative / '.git').exists(), relative + ' installed')
