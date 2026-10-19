@@ -40,6 +40,7 @@ if [[ -r "$HOME/.bash_completions/caa-kubectx.sh" ]]; then
 fi
 
 alias ro='rg'
+alias tn='tmux new-session -A -s dev'
 if (( $+commands[eza] )); then
   alias ls='eza --icons=always'
   alias ll='eza --icons=always --long --git'
