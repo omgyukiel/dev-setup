@@ -41,6 +41,7 @@ fi
 
 alias ro='rg'
 alias tn='tmux new-session -A -s'
+alias ta='tmux attach -t'
 if (( $+commands[eza] )); then
   alias ls='eza --icons=always'
   alias ll='eza --icons=always --long --git'
