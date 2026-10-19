@@ -1,65 +1,94 @@
-# Daily Shortcut Playbook
+# Daily shortcuts
 
-Quick reference for the keyboard flows that compound productivity across tmux, AeroSpace, WezTerm, and the Zsh + Powerlevel10k shell.
+## Ghostty
+
+- Cmd-T opens a new tab; Cmd-W closes the current surface, with confirmation when needed.
+- Cmd-Plus / Cmd-Minus changes text size; Cmd-0 resets it.
+- Cmd-Shift-Comma reloads the config.
+- Use tmux for splits; Ghostty keeps its default keyboard shortcuts.
 
 ## tmux
 
-- Pane tiling: `Ctrl-b |` (split right) / `Ctrl-b -` (split down) to lay out logs vs. editors in seconds.
-- Resize nudges: hold `Ctrl-b` then tap `h`/`j`/`k`/`l` to grow/shrink panes in 5-cell steps; zoom a pane with `Ctrl-b m` when deep-diving.
-- Instant reload: `Ctrl-b r` after editing `~/.tmux.conf` to apply tweaks without leaving the session.
-- Session attach in cwd: inside an existing pane hit `Ctrl-b M-c` to open/attach a session rooted where you already are (great for project-specific multiplexers).
-- Morning resume: let tmux-continuum restore your layout, then cycle windows with `Ctrl-b n`/`Ctrl-b p` and use tmux's built-in pane selectors when needed.
+Press Ctrl-B, release, then the listed key unless shown otherwise.
 
-## LazyVim / Neovim
+| Key | Action |
+| --- | --- |
+| `\|` / `-` | Split right / below |
+| `x` | Kill the current pane; confirm with `y` |
+| `h/j/k/l` | Resize left/down/up/right |
+| `m` | Zoom or unzoom the current pane |
+| `c` | New window |
+| `n` / `p` | Next / previous window |
+| `w` / `s` | Choose a window / session |
+| `,` | Rename window |
+| `d` | Detach; reconnect with `tmux attach -t NAME` |
+| `r` | Reload config |
+| Ctrl-S / Ctrl-R | Save / restore session layout |
+| Shift-I | Install configured TPM plugins |
+| `[` | Enter vi copy mode; `v` selects and `y` copies to the macOS clipboard |
 
-- Tmux-aware panes: use `Ctrl-h/j/k/l` in normal buffers to move across Neovim windows and out to adjacent tmux panes.
-- Snacks explorer: `<leader>e` opens at project root, `<leader>E` opens at cwd, `u` refreshes, `H` toggles hidden files, and `I` toggles gitignored files.
-- File search: `<leader>ff` searches project root, `<leader>fF` searches cwd, and `<leader>,` switches among open buffers.
-- Markdown flow: `gcc` comments the current line, visual `gc` comments a selection, and `<leader>cp` toggles Markdown preview.
-- Python flow: enable the Python extra, install `pyright`/`ruff` in Mason, then use `<leader>cv` to select the project venv before `gd` import navigation.
+Ctrl-H/J/K/L (without the prefix) moves left/down/up/right across panes. Inside
+Neovim, it moves through editor splits first, then into tmux panes at the edge.
+Continuum autosaves every 15 minutes while the status bar runs; restoring layout
+does not resume arbitrary processes or remote connections at their previous state.
 
 ## AeroSpace
 
-- Workspace grid: `Alt-1`..`Alt-9` switches between numbered workspaces; `Alt-Shift-1`..`Alt-Shift-9` sends the focused app to a numbered workspace.
-- Focus vs. move: `Alt-h/j/k/l` focuses adjacent windows; add `Shift` to move the current app to a neighbor slot.
-- Layout flip: `Alt-/` forces tile mode; `Alt-,` toggles accordion stacks when you need vertical code reviews.
-- Secondary display: `Alt-Shift-Tab` jumps to the dedicated `secondary` workspace, `Alt-Shift-S` sends the focused window there, and `Alt-Tab` bounces between current and previous workspace.
-- Layout reset: `Alt-Shift-;` enters service mode, then `r` flattens workspace trees or `backspace` closes all but the active window.
+- Option-H/J/K/L focuses adjacent windows; add Shift to move windows instead.
+- Option-1…9 changes workspace; Option-Shift-1…9 sends the current window there.
+- Option-/ toggles tile orientation; Option-Comma toggles accordion orientation.
+- Option-Tab switches to the previous workspace.
+- Option-Shift-Tab selects `secondary`; Option-Shift-S sends a window there.
+- Option-Shift-Minus / Option-Shift-Equal resizes the selected container.
+- Option-Shift-Semicolon enters service mode: `r` resets the layout, `f` toggles
+  floating, and Escape reloads config and returns to normal mode.
+- In service mode, Backspace closes every other window on the current workspace.
 
-## WezTerm
+## LazyVim
 
-- Tabbed tasking: `Cmd-T` opens a new tab with your Powerlevel10k prompt already themed; rotate through tabs with the macOS shortcuts `Cmd-Shift-[` / `Cmd-Shift-]`.
-- Visual clarity toggles: exploit the 0.8 opacity + blur—stack WezTerm panes over docs without losing readability.
-- Font legibility: `Cmd-=` / `Cmd--` temporarily adjusts the 19pt Meslo NF size during screen shares; reset with `Cmd-0`.
+Space is the leader key. Use Ctrl-H/J/K/L in normal mode for split/pane navigation.
 
-## Terminal Input Editing
+- Space-E opens the file explorer; Space-Shift-E opens it at the current directory.
+- Space-F-F finds project files; Space-F-Shift-F finds files in the current directory.
+- Space-Comma switches buffers.
+- `gcc` comments a line; select lines and use `gc` to comment the selection.
+- Space-C-P opens Markdown preview.
+- Space-C-V selects a Python virtual environment.
+- `gd` goes to a definition when a language server is attached.
+- `:Lazy` manages plugins; `:Mason` manages language tools.
 
-- Line bounds: `Ctrl-a` jumps to the beginning of the input; `Ctrl-e` jumps to the end.
-- Word movement: `Option-b` or `Option-Left` moves back one word; `Option-f` or `Option-Right` moves forward one word. AeroSpace uses `Alt-h/j/k/l`, so arrows are the safer word-movement habit.
-- Word deletion: `Ctrl-w` or `Option-Backspace` deletes the previous word; `Option-d` deletes the next word.
-- Line deletion: `Ctrl-u` clears before the cursor/current input; `Ctrl-k` clears after the cursor.
-- History search: `Ctrl-r` opens reverse search through command history.
+## Zsh
 
-## Zsh + Powerlevel10k
+- `ls`, `ll`, `la`: icon listings, long listings, and hidden files.
+- `z keyword` / `cd keyword`: jump to a learned directory; `zi`: interactive chooser.
+- Right Arrow at the end of input accepts the gray autosuggestion.
+- Up/Down searches history matching the prefix already typed.
+- Ctrl-R searches history with fzf; Ctrl-T inserts file paths.
+- Ctrl-A / Ctrl-E moves to the beginning / end of input; Ctrl-W deletes a word.
+- Outside tmux, Ctrl-K clears after the cursor. Inside tmux it navigates up.
+- `prompt-theme original` restores saved prompt colors; `prompt-theme tokyo-night`
+  applies the color overlay with the same layout.
 
-- Directory jumps: `z <keyword>` teleports via zoxide (replace built-in `cd`); pair with `tmux attach -t $(basename $PWD)` after landing.
-- Smarter listings: `ls` auto-expands to `eza --icons=always` so you get git status and file types at a glance.
-- Git context: lean on the prompt’s VCS segment—branch state is always visible; transient prompt keeps history tidy right after enter.
-- Kubernetes helpers: `caa-kubectx` completion + the prompt’s kube context indicator (if enabled in `.p10k.zsh`) guards against staging/prod mix-ups.
+## Search
 
-## ripgrep
+```bash
+rg 'needle'
+rg -S 'needle'                 # smart case; plain rg is case-sensitive
+rg -n -C3 'needle' -g '*.ts'    # line numbers, context, file filter
+rg --files -g '*.py' | fzf     # choose among matching file paths
+fd pattern
+bat path/to/file
+```
 
-- Core search: `rg 'needle'` recursively scans the current directory with smart case sensitivity (uppercase forces exact case, lowercase matches both).
-- Path filters: add `-g '*.ts'` or `-g '!node_modules'` to narrow the scan to the files you care about while skipping bulky deps.
-- Context slices: use `-n` to show line numbers, `-C3` for three lines of context, and `--stats` when you want a quick hit rate summary.
-- Fast refines: combine ripgrep with keyboard nav—`rg pattern | fzf` for interactive filtering, or jump straight to files via `rg --files -g '*.py'`.
+Oracle and Kubernetes helpers are machine-specific and load from
+`~/.config/zsh/local.zsh` when configured.
 
-## Daily Scenarios
+## Resource monitoring
 
-- **Cluster triage sprint:** Use AeroSpace workspace `Alt-3` for kube dashboards. Inside WezTerm, split tmux panes (`Ctrl-b |` and `Ctrl-b -`) for `kubectl get pods -w`, logs, and live `oci` CLI. When an outage hits, zoom the offending pane (`Ctrl-b m`), grab context, then unzoom to continue sweeping.
-- **Agent dev loop:** Workspace `Alt-1` houses code. Run Neovim + tests in tmux panes; left pane auto-reloads `pytest -f`, right pane hosts the agent process, bottom pane for Git. Use `Alt-Shift-h/l` to move the focused app in the layout, or `Alt-Shift-Tab` to jump to the dedicated secondary-display workspace.
-- **Release prep:** Workspace `Alt-4` handles release branches. Spawn a fresh tmux session (`tmux new -s release -c ~/dev/<repo>`) via `Ctrl-b M-c`. Track checklists in tab 2, `helm upgrade` dry runs in tab 3; rely on tmux-resurrect to recover if the laptop reboots mid-release.
-- **Morning ramp-up:** After login, AeroSpace autostarts and tmux-continuum revives yesterday’s sessions. Run `exec zsh` in WezTerm to refresh the shell, then `Ctrl-b n` / `Ctrl-b p` to skim overnight panes. Use `Alt-Tab` to flip between current and last workspace while triaging notifications.
-- **Context clean-up:** When windows sprawl, hit `Alt-Shift-;` then `backspace` in AeroSpace to close all but the active window; follow with `Ctrl-b &` inside tmux to kill stray windows, keeping your session lean.
+Run `btop` to view this Mac's CPU, memory, disks, network activity and processes.
+Press `q` to quit. Keep it in a tmux window named `monitor` while other windows
+remain available for editing and shell commands.
 
-Keep this file next to the configs for quick recall—update it any time you add bindings or refine routines.
+For a guided walkthrough, follow [docs/PRACTICE.md](docs/PRACTICE.md). Use `tldr tmux`,
+`tldr rg`, or `tldr tar` for short command examples; the first lookup downloads
+the page cache.
