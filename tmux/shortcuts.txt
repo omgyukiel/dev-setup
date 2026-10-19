@@ -1,0 +1,72 @@
+
+DEV SETUP SHORTCUTS                       Run tmux-help to show this again
+Last updated: 2026-10-18
+Prefix = Ctrl-B, release, then press the key. Option = Alt on macOS.
+
+TMUX: SESSIONS, WINDOWS, PANES
+  tn                          Create or attach to the dev session
+  tmux new -As NAME           Create or attach to a named session (outside tmux)
+  tmux new -As NAME -c DIR    Start a new session in DIR; existing panes stay put
+  tmux ls                    List sessions
+  tmux attach -t NAME         Attach to an existing session (outside tmux)
+  Prefix d                   Detach; programs keep running
+  Prefix s / w               Choose session / window
+  Prefix c / ,               Create / rename window (use windows as tabs)
+  Prefix n / p / 0..9         Next / previous / numbered window
+  Prefix | / -               Split right / below; inherit current directory
+  Ctrl-H/J/K/L               Move left/down/up/right across Neovim/tmux panes
+  Prefix h/j/k/l             Resize pane left/down/up/right
+  Prefix m                   Zoom / unzoom pane
+  Prefix x, then y           Kill current pane and its program; exit also works
+  Prefix r                   Reload tmux config
+  Prefix Shift-I             Install configured TPM plugins
+  Prefix Ctrl-S / Ctrl-R     Save / restore layout; autosave about every 15 min
+                             Restore recovers layout, not exact process state
+  Prefix [                   Enter vi copy mode; arrows or h/j/k/l to move
+  v, move, y                 Select, extend, copy to macOS clipboard; Cmd-V paste
+  Escape                     Cancel copy mode
+  tmux kill-session -t NAME   Stop that session and ALL programs inside it
+
+SHELL
+  ls / ll / la               Icon listing / detailed with Git / include hidden
+  cd WORD / z WORD / zi      Jump to learned directory / interactive chooser
+  Right Arrow                Accept gray suggestion at end of input
+  Up / Down                  Search history matching typed prefix
+  Ctrl-R / Ctrl-T            Fuzzy history / insert selected file paths
+  Ctrl-A / Ctrl-E / Ctrl-W    Start of line / end of line / delete previous word
+  Ctrl-K                     Clear after cursor outside tmux; navigate up inside
+  tldr COMMAND               Short practical command examples
+  prompt-theme original      Saved prompt colors
+  prompt-theme tokyo-night   Tokyo Night overlay; same prompt layout
+  lazygit / btop              Git interface / resource monitor (q quits btop)
+  rg 'TEXT'                  Search file contents
+  rg -S 'TEXT'               Smart-case search
+  rg -n -C3 'TEXT' -g '*.ts'  Line numbers, context, file filter
+  rg --files -g '*.py' | fzf  Fuzzy-pick a matching file
+  fd PATTERN                 Find file paths
+  bat FILE / bat -P FILE     Highlighted file viewer / print without paging
+
+NEOVIM (normal mode; Space is the leader)
+  Space e / Space Shift-E    Explorer at project root / current directory
+  Space f f / Space f Shift-F  Find files at root / current directory
+  Space ,                    Switch buffers
+  gcc / select then gc       Comment line / selected lines
+  Space c p / Space c v      Markdown preview / choose Python environment
+  gd                         Go to definition with a language server attached
+  :Lazy / :Mason             Manage plugins / language tools
+
+GHOSTTY
+  Cmd-T / Cmd-W              New native tab / close surface; prefer tmux windows
+  Cmd-Plus / Minus / 0       Increase / decrease / reset font size
+  Cmd-Shift-Comma             Reload Ghostty config
+
+AEROSPACE
+  Option-H/J/K/L             Focus left/down/up/right; add Shift to move window
+  Option-1..9                Change workspace; add Shift to send window there
+  Option-/ / Option-Comma    Tile orientation / accordion orientation
+  Option-Tab                 Previous workspace
+  Option-Shift-Tab / S       Select secondary workspace / send window there
+  Option-Shift-Minus / Equal  Shrink / grow container
+  Option-Shift-Semicolon      Enter service mode:
+    r / f / Escape           Reset layout / toggle floating / reload and exit
+    Backspace                Close ALL OTHER windows on the current workspace

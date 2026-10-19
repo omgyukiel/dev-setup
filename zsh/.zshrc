@@ -8,6 +8,10 @@ elif [[ -x /usr/local/bin/brew ]]; then
 fi
 typeset -g DEV_SETUP_BREW_PREFIX=${HOMEBREW_PREFIX:-/opt/homebrew}
 
+# Print session help before Powerlevel10k starts capturing prompt output.
+typeset -g DEV_SETUP_ZSH_DIR=${${(%):-%x}:A:h}
+source "$DEV_SETUP_ZSH_DIR/tmux-help.zsh"
+
 if [[ -r ${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -59,8 +63,7 @@ if (( $+commands[fzf] )); then
   eval "$(fzf --zsh)"
 fi
 
-# Resolve the symlink so theme files are found alongside this repo's .zshrc.
-typeset -g DEV_SETUP_ZSH_DIR=${${(%):-%x}:A:h}
+# Theme files live alongside this repo's .zshrc, resolved above.
 source "$DEV_SETUP_ZSH_DIR/prompt-theme.zsh"
 
 [[ ! -r "$DEV_SETUP_BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] || source "$DEV_SETUP_BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
