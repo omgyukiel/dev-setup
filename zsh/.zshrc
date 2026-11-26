@@ -44,6 +44,7 @@ if [[ -r "$HOME/.bash_completions/caa-kubectx.sh" ]]; then
 fi
 
 alias ro='rg'
+alias python='python3'
 alias tn='tmux new-session -A -s'
 alias ta='tmux attach -t'
 alias td='tmux detach'
